@@ -24,3 +24,23 @@ jobs:
       run: npm rum test:unit
     - name: Display Softuni username
       run: echo "LaserCat" 
+
+  ui_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: Build application
+      run: npm install
+    - name: Install playwright browsers
+      run: npx playwright install
+    - name: Start application in backround
+      run: npm start &
+    - name: Run UI tests
+      run: npm run test:iu
+    
